@@ -34,10 +34,7 @@ bgp_peer_groups:
   ipv4_underlay_peers:
     password: 7x4B4rnJhZB438m9+BrBfQ==
 
-# P2P interfaces MTU, includes VLANs 4093 and 4094 that are over peer-link
-# If you're running vEOS-lab or cEOS, you should use MTU of 1500 instead as shown in the following line
-# p2p_uplinks_mtu: 1500
-p2p_uplinks_mtu: 1500
+p2p_uplinks_mtu: 9214
 
 # Default gateway used for the management interface
 mgmt_gateway: 192.168.123.1
@@ -88,13 +85,17 @@ l3leaf:
     # For example, set the minimum offset l3leaf.defaults.loopback_ipv4_offset: < total # spine switches > or vice versa.
     loopback_ipv4_offset: 2
     # Definition of pool of IPs to be used as Virtual Tunnel EndPoint (VXLAN origin and destination IPs)
-    vtep_loopback_ipv4_pool: 10.255.254.0/27
+    vtep_loopback_ipv4_pool: 10.255.254.0/24
     # Interfaces connecting this device towards the upper level of the hierarchy (Spines in this case)
     uplink_interfaces: ['Ethernet1', 'Ethernet2']
     # Ansible hostname of the devices used to establish neighborship (IP assignments and BGP peering)
     uplink_switches: ['S01', 'S02']
     # Definition of pool of IPs to be used in P2P links
     uplink_ipv4_pool: 10.255.0.0/24
+    # address pool for MLAG peering
+    mlag_peer_ipv4_pool: 10.255.1.0/24
+    # address pool for L3 peering over MLAG peer-link
+    mlag_peer_l3_ipv4_pool: 10.255.2.0/24
     bgp_defaults:
       # The following command must not be enabled when using vEOS-lab
       # - update wait-install
@@ -111,24 +112,43 @@ l3leaf:
   node_groups:
     # Definition of a node group that will include two devices in MLAG.
     # Definitions under the group will be inherited by both nodes in the group
-    L01:
+    pod0:
       # ASN to be used by BGP for the group. Both devices in the MLAG pair will use the same BGP ASN
       bgp_as: 65001
       nodes:
         L01:
           id: 1
           mgmt_ip: 192.168.123.101/24
-          # Definition of the port to be used in the uplink device facing this device.
-          # Note that the number of elements in this list must match the length of 'uplink_switches' as well as 'uplink_interfaces'
-          uplink_switch_interfaces:
-            - Ethernet1
-            - Ethernet1
-    L02:
-      bgp_as: 65102
-      nodes:
+          uplink_switch_interfaces: ['Ethernet1', 'Ethernet1']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
         L02:
           id: 2
           mgmt_ip: 192.168.123.102/24
-          uplink_switch_interfaces:
-            - Ethernet2
-            - Ethernet2
+          uplink_switch_interfaces: ['Ethernet2', 'Ethernet2']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
+    pod1:
+      bgp_as: 65002
+      nodes:
+        L03:
+          id: 3
+          mgmt_ip: 192.168.123.103/24
+          uplink_switch_interfaces: ['Ethernet3', 'Ethernet3']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
+        L04:
+          id: 4
+          mgmt_ip: 192.168.123.104/24
+          uplink_switch_interfaces: ['Ethernet4', 'Ethernet4']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
+    pod3:
+      bgp_as: 65002
+      nodes:
+        L05:
+          id: 5
+          mgmt_ip: 192.168.123.105/24
+          uplink_switch_interfaces: ['Ethernet5', 'Ethernet5']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
+        L06:
+          id: 6
+          mgmt_ip: 192.168.123.106/24
+          uplink_switch_interfaces: ['Ethernet6', 'Ethernet6']
+          mlag_interfaces: ['Ethernet3', 'Ethernet4']
