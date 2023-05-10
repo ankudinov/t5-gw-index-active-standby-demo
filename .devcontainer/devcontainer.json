@@ -1,0 +1,51 @@
+{
+    "name": "clab-demo",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // git essentials
+                "piotrpalarz.vscode-gitignore-generator",
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                "donjayamanne.githistory",
+                // spell checker
+                "streetsidesoftware.code-spell-checker",
+                // errors and highlighters
+                "IgorSbitnev.error-gutters",
+                "fabiospampinato.vscode-highlight",
+                "mechatroner.rainbow-csv",
+                // excalidraw
+                "pomdtr.excalidraw-editor",
+                // markdown
+                "yzhang.markdown-all-in-one",
+                "bierner.markdown-checkbox",
+                "telesoho.vscode-markdown-paste-image",
+                "yzane.markdown-pdf",
+                "bierner.markdown-mermaid",
+                "AlanWalk.markdown-toc",
+                "DavidAnson.vscode-markdownlint",
+                // variousl tools
+                "tuxtina.json2yaml",
+                "vscode-icons-team.vscode-icons",
+                "tomoki1207.pdf",
+                "mutantdino.resourcemonitor"
+            ]
+        }
+    },
+    "runArgs": [
+        // add flags required to run cLab on docker-outside-of-docker
+        "--network=host",
+		"--pid=host",
+		"--privileged"
+    ],
+	"workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
+	"workspaceFolder": "${localWorkspaceFolder}",
+    "features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+    // install cmdo tool with post-create command
+    "postCreateCommand": "bash -c \"$(curl -sL https://raw.githubusercontent.com/hellt/cmdo/master/get.sh)\""
+}
