@@ -15,20 +15,28 @@ topology:
   nodes:
     S01:
       mgmt_ipv4: 192.168.123.11
+      startup-config: init-configs/S01.cfg
     S02:
       mgmt_ipv4: 192.168.123.12
+      startup-config: init-configs/S02.cfg
     L01:
       mgmt_ipv4: 192.168.123.101
+      startup-config: init-configs/L01.cfg
     L02:
       mgmt_ipv4: 192.168.123.102
+      startup-config: init-configs/L02.cfg
     L03:
       mgmt_ipv4: 192.168.123.103
+      startup-config: init-configs/L03.cfg
     L04:
       mgmt_ipv4: 192.168.123.104
+      startup-config: init-configs/L04.cfg
     L05:
       mgmt_ipv4: 192.168.123.105
+      startup-config: init-configs/L05.cfg
     L06:
       mgmt_ipv4: 192.168.123.106
+      startup-config: init-configs/L06.cfg
     H12:
       mgmt_ipv4: 192.168.123.112
       startup-config: init-configs/h12.cfg
@@ -62,8 +70,8 @@ topology:
   - endpoints: ["L05:eth4", "L06:eth4"]
   # host to leaf connections
   - endpoints: ["L01:eth10", "H12:eth1"]
-  - endpoints: ["L02:eth10", "H12:eth1"]
+  - endpoints: ["L02:eth10", "H12:eth2"]
   - endpoints: ["L03:eth10", "H34:eth1"]
-  - endpoints: ["L04:eth10", "H34:eth1"]
+  - endpoints: ["L04:eth10", "H34:eth2"]
   - endpoints: ["L05:eth10", "H56:eth1"]
-  - endpoints: ["L06:eth10", "H56:eth1"]
+  - endpoints: ["L06:eth10", "H56:eth2"]

@@ -1,0 +1,46 @@
+---
+### group_vars/ENDPOINTS.yml
+
+# Definition of connected endpoints in the fabric.
+servers:
+  # host12
+  H12:
+    adapters:
+    - type: server
+      server_ports: [ eth1, eth2 ]
+      switch_ports: [ Ethernet10, Ethernet10 ]
+      switches: [ L01, L02 ]
+      vlans: 10, 20
+      native_vlan: 1
+      mode: trunk
+      spanning_tree_portfast: edge
+      port_channel:
+        mode: active
+
+  # host34
+  H34:
+    adapters:
+    - type: server
+      server_ports: [ eth1, eth2 ]
+      switch_ports: [ Ethernet10, Ethernet10 ]
+      switches: [ L03, L04 ]
+      vlans: 10, 20
+      native_vlan: 1
+      mode: trunk
+      spanning_tree_portfast: edge
+      port_channel:
+        mode: active
+
+  # host56
+  H56:
+    adapters:
+    - type: server
+      server_ports: [ eth1, eth2 ]
+      switch_ports: [ Ethernet10, Ethernet10 ]
+      switches: [ L05, L06 ]
+      vlans: 10, 20
+      native_vlan: 1
+      mode: trunk
+      spanning_tree_portfast: edge
+      port_channel:
+        mode: active
