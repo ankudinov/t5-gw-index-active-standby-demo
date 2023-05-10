@@ -29,9 +29,41 @@ topology:
       mgmt_ipv4: 192.168.123.105
     L06:
       mgmt_ipv4: 192.168.123.106
+    H12:
+      mgmt_ipv4: 192.168.123.112
+      startup-config: init-configs/h12.cfg
+    H34:
+      mgmt_ipv4: 192.168.123.134
+      startup-config: init-configs/h34.cfg
+    H56:
+      mgmt_ipv4: 192.168.123.156
+      startup-config: init-configs/h56.cfg
 
   links:
+  # leaf to spine connections
   - endpoints: ["L01:eth1", "S01:eth1"]
   - endpoints: ["L01:eth2", "S02:eth1"]
   - endpoints: ["L02:eth1", "S01:eth2"]
   - endpoints: ["L02:eth2", "S02:eth2"]
+  - endpoints: ["L03:eth1", "S01:eth3"]
+  - endpoints: ["L03:eth2", "S02:eth3"]
+  - endpoints: ["L04:eth1", "S01:eth4"]
+  - endpoints: ["L04:eth2", "S02:eth4"]
+  - endpoints: ["L05:eth1", "S01:eth5"]
+  - endpoints: ["L05:eth2", "S02:eth5"]
+  - endpoints: ["L06:eth1", "S01:eth6"]
+  - endpoints: ["L06:eth2", "S02:eth6"]
+  # MLAG peer links
+  - endpoints: ["L01:eth3", "L02:eth3"]
+  - endpoints: ["L01:eth4", "L02:eth4"]
+  - endpoints: ["L03:eth3", "L04:eth3"]
+  - endpoints: ["L03:eth4", "L04:eth4"]
+  - endpoints: ["L05:eth3", "L06:eth3"]
+  - endpoints: ["L05:eth4", "L06:eth4"]
+  # host to leaf connections
+  - endpoints: ["L01:eth10", "H12:eth1"]
+  - endpoints: ["L02:eth10", "H12:eth1"]
+  - endpoints: ["L03:eth10", "H34:eth1"]
+  - endpoints: ["L04:eth10", "H34:eth1"]
+  - endpoints: ["L05:eth10", "H56:eth1"]
+  - endpoints: ["L06:eth10", "H56:eth1"]
