@@ -140,7 +140,7 @@ l3leaf:
           uplink_switch_interfaces: ['Ethernet4', 'Ethernet4']
           mlag_interfaces: ['Ethernet3', 'Ethernet4']
     pod3:
-      bgp_as: 65002
+      bgp_as: 65003
       nodes:
         L05:
           id: 5
