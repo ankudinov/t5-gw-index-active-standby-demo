@@ -7,3 +7,7 @@ alias l03='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "Strict
 alias l04='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.104'
 alias l05='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.105'
 alias l06='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.106'
+
+alias h12='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.112'
+alias h34='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.134'
+alias h56='sshpass -p arista123 ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" -o "LogLevel=quiet" cvpadmin@192.168.123.156'
